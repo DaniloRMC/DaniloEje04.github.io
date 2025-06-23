@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reloj Analógico</title>
+    <style>
+        .reloj {
+            width: 200px;
+            height: 200px;
+            border: 10px solid rgb(41, 199, 57);
+            border-radius: 50%;
+            position: relative;
+        }
+        .manecilla {
+            position: absolute;
+            background: black;
+            transform-origin: bottom;
+            transition: transform 0.5s;
+        }
+        .hora {
+            height: 50px;
+            width: 4px;
+            top: 50px;
+            left: 98px;
+        }
+        .minuto {
+            height: 70px;
+            width: 2px;
+            top: 30px;
+            left: 99px;
+        }
+    </style>
+</head>
+<body>
+    <div class="reloj">
+        <div class="manecilla hora" id="manecilla-hora"></div>
+        <div class="manecilla minuto" id="manecilla-minuto"></div>
+    </div>
+
+    <script>
+        function actualizarReloj() {
+            const ahora = new Date();
+            const horas = ahora.getHours();
+            const minutos = ahora.getMinutes();
+            const segundos = ahora.getSeconds();
+            const gradosHoras = (horas % 12) * 30 + (minutos / 60) * 30;
+            const gradosMinutos = minutos * 6;
+
+            document.getElementById('manecilla-hora').style.transform = `rotate(${gradosHoras}deg)`;
+            document.getElementById('manecilla-minuto').style.transform = `rotate(${gradosMinutos}deg)`;
+        }
+
+        setInterval(actualizarReloj, 1000);
+        actualizarReloj();
+    </script>
+</body>
+</html>
